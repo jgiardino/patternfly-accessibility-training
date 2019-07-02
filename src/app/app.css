@@ -12,3 +12,36 @@
 .notification-container {
   flex: 0 1 auto;
 }
+
+html, body, #root {
+  height: 100%;
+}
+
+.card-how-to, .ice-cream-form {
+  overflow: scroll;
+}
+
+.light-gray {
+  color: #999 !important;
+}
+
+.button-width {
+  width: 48px;
+  padding-top: 26px;
+}
+
+.pf-c-form-control[multiple][size] {
+  background-image: none;
+  background: var(--pf-c-form-control--BackgroundColor);
+}
+.pf-c-form-control.invalid-select[multiple][size] {
+  background: var(--pf-c-form-control--invalid--Background);
+}
+
+.ice-cream-form-footer {
+  background: var(--pf-global--BackgroundColor--300);
+}
+
+.main-section {
+  background: var(--pf-global--BackgroundColor--light-300);
+}
