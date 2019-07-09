@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Route, NavLink, BrowserRouter } from "react-router-dom";
+import '@patternfly/patternfly/patternfly.css';
 import '@patternfly/react-styles/css/utilities/Spacing/spacing.css';
 import '@patternfly/react-styles/css/utilities/Sizing/sizing.css';
 import '@patternfly/react-styles/css/utilities/Alignment/alignment.css';
@@ -11,6 +12,10 @@ import LowVisionBefore from "../pages/LowVisionBefore";
 import LowVisionAfter from "../pages/LowVisionAfter";
 import KeyboardMotorBefore from "../pages/KeyboardMotorBefore";
 import KeyboardMotorAfter from "../pages/KeyboardMotorAfter";
+import KeyboardScreenReaderBefore from "../pages/KeyboardScreenReaderBefore";
+import KeyboardScreenReaderAfter from "../pages/KeyboardScreenReaderAfter";
+import ScreenReaderBefore from "../pages/ScreenReaderBefore";
+import ScreenReaderAfter from "../pages/ScreenReaderAfter";
 import {
   Brand,
   Nav,
@@ -28,30 +33,43 @@ import imgBrand from '../imgBrand.png';
 
 export default class App extends Component {
   public state = {
-    activeItem: 'grp-1_itm-1'
+    activeItem: 'home'
   };
   public render() {
     const { activeItem } = this.state;
-
     const PageNav = (
       <Nav onSelect={this.onNavSelect} id="nav-primary-simple">
         <NavList id="nav-list-simple" variant={NavVariants.simple}>
-          <NavItem itemId="grp-1_itm-1" isActive={activeItem === 'grp-1_itm-1'}>
+          <NavItem itemId="grp-1_itm-1" isActive={activeItem === 'home'}>
             <NavLink to="/">Home</NavLink>
           </NavItem>
           <NavItemSeparator />
-          <NavItem itemId="grp-1_itm-2" isActive={activeItem === 'grp-1_itm-2'}>
-            <NavLink to="/LowVisionBefore">Low Vision - Before</NavLink>
+          <NavItem itemId="grp-1_itm-2" isActive={activeItem === 'LowVisionBefore'}>
+            <NavLink to="/LowVisionBefore">Low & No Vision - Before</NavLink>
           </NavItem>
-          <NavItem itemId="grp-1_itm-3" isActive={activeItem === 'grp-1_itm-3'}>
-            <NavLink to="/LowVisionAfter">Low Vision - After</NavLink>
+          <NavItem itemId="grp-1_itm-3" isActive={activeItem === 'LowVisionAfter'}>
+            <NavLink to="/LowVisionAfter">Low & No Vision - After</NavLink>
           </NavItem>
           <NavItemSeparator />
-          <NavItem itemId="grp-1_itm-4" isActive={activeItem === 'grp-1_itm-4'}>
-            <NavLink to="/KeyboardMotorBefore">Keyboard Motor - Before</NavLink>
+          <NavItem itemId="grp-1_itm-4" isActive={activeItem === 'KeyboardMotorBefore'}>
+            <NavLink to="/KeyboardMotorBefore">Keyboard & Motor - Before</NavLink>
           </NavItem>
-          <NavItem itemId="grp-1_itm-5" isActive={activeItem === 'grp-1_itm-5'}>
-            <NavLink to="/KeyboardMotorAfter">Keyboard Motor - After</NavLink>
+          <NavItem itemId="grp-1_itm-5" isActive={activeItem === 'KeyboardMotorAfter'}>
+            <NavLink to="/KeyboardMotorAfter">Keyboard & Motor - After</NavLink>
+          </NavItem>
+          <NavItemSeparator />
+          <NavItem itemId="grp-1_itm-2" isActive={activeItem === 'KeyboardScreenReaderBefore'}>
+            <NavLink to="/KeyboardScreenReaderBefore">Keyboard & Screen Reader - Before</NavLink>
+          </NavItem>
+          <NavItem itemId="grp-1_itm-3" isActive={activeItem === 'KeyboardScreenReaderAfter'}>
+            <NavLink to="/KeyboardScreenReaderAfter">Keyboard & Screen Reader - After</NavLink>
+          </NavItem>
+          <NavItemSeparator />
+          <NavItem itemId="grp-1_itm-4" isActive={activeItem === 'ScreenReaderBefore'}>
+            <NavLink to="/ScreenReaderBefore">Screen Reader - Before</NavLink>
+          </NavItem>
+          <NavItem itemId="grp-1_itm-5" isActive={activeItem === 'ScreenReaderAfter'}>
+            <NavLink to="/ScreenReaderAfter">Screen Reader - After</NavLink>
           </NavItem>
         </NavList>
       </Nav>
@@ -74,6 +92,10 @@ export default class App extends Component {
           <Route path="/LowVisionAfter" component={LowVisionAfter} />
           <Route path="/KeyboardMotorBefore" component={KeyboardMotorBefore} />
           <Route path="/KeyboardMotorAfter" component={KeyboardMotorAfter} />
+          <Route path="/KeyboardScreenReaderBefore" component={KeyboardScreenReaderBefore} />
+          <Route path="/KeyboardScreenReaderAfter" component={KeyboardScreenReaderAfter} />
+          <Route path="/ScreenReaderBefore" component={ScreenReaderBefore} />
+          <Route path="/ScreenReaderAfter" component={ScreenReaderAfter} />
         </Page>
       </BrowserRouter>
     );
