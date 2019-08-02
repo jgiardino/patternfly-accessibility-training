@@ -84,7 +84,7 @@ const routes: IAppRoute[] = [
     icon: null,
     label: 'Dashboard',
     path: '/dashboard',
-    title: 'Main Dashboard Title'
+    title: 'Patternfly Accessibility Training'
   },
   {
     component: Support,

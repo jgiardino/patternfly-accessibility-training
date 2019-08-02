@@ -8,7 +8,8 @@
   "private": true,
   "scripts": {
     "prebuild": "yarn clean",
-    "build": "webpack --config webpack.prod.js",
+    "build": "webpack --config webpack.prod.js && yarn dr:surge",
+    "dr:surge": "node dr-surge.js",
     "start": "webpack-dev-server --hot --color --progress --info=true --config webpack.dev.js",
     "test": "jest",
     "lint": "tslint -c ./tslint.json --project .",
