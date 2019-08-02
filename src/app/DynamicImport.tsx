@@ -4,6 +4,7 @@ import { accessibleRouteChangeHandler } from '@app/utils/utils';
 interface IDynamicImport {
   load: () => Promise<any>;
   children: any;
+  inAppNavigation: boolean;
 }
 
 class DynamicImport extends React.Component<IDynamicImport> {
@@ -19,7 +20,9 @@ class DynamicImport extends React.Component<IDynamicImport> {
       }
     })
     .then(() => {
-      accessibleRouteChangeHandler();
+      if (this.props.inAppNavigation) {
+        accessibleRouteChangeHandler();
+      }
     });
   }
   public render() {

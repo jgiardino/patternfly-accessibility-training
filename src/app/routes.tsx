@@ -3,7 +3,6 @@ import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { Alert, PageSection } from '@patternfly/react-core';
 import { DynamicImport } from '@app/DynamicImport';
 import { accessibleRouteChangeHandler } from '@app/utils/utils';
-import { Dashboard } from '@app/Dashboard/Dashboard';
 import { NotFound } from '@app/NotFound/NotFound';
 import DocumentTitle from 'react-document-title';
 import { Home } from "../pages/Home";
@@ -21,8 +20,9 @@ const getSupportModuleAsync = () => {
 };
 
 const Support = (routeProps: RouteComponentProps) => {
+  let navAction = routeProps.history.action === 'PUSH';
   return (
-    <DynamicImport load={getSupportModuleAsync()}>
+    <DynamicImport inAppNavigation={navAction} load={getSupportModuleAsync()}>
       {(Component: any) => {
           let loadedComponent: any;
           if (Component === null) {
@@ -48,7 +48,11 @@ const RouteWithTitleUpdates = ({
   title,
   ...rest
 }) => {
+  let inAppNavigation: boolean;
+
   function routeWithTitle(routeProps: RouteComponentProps) {
+
+    inAppNavigation = routeProps.history.action === 'PUSH';
     return (
       <DocumentTitle title={title}>
         <Component {...routeProps} />
@@ -57,9 +61,10 @@ const RouteWithTitleUpdates = ({
   }
 
   React.useEffect(() => {
-    if (!isAsync) {
-      accessibleRouteChangeHandler()
+    if (!isAsync && inAppNavigation) {
+      accessibleRouteChangeHandler();
     }
+
   }, []);
 
   return (
@@ -82,8 +87,8 @@ const routes: IAppRoute[] = [
     component: Home,
     exact: true,
     icon: null,
-    label: 'Dashboard',
-    path: '/dashboard',
+    label: 'Home',
+    path: '/',
     title: 'Patternfly Accessibility Training'
   },
   {
@@ -172,7 +177,6 @@ const AppRoutes = () => (
         title={title}
         isAsync={isAsync} />
     ))}
-    <Redirect exact={true} from="/" to="/dashboard" />
     <RouteWithTitleUpdates component={NotFound} title={'404 Page Not Found'} />
   </Switch>
 );
