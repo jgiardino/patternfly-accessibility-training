@@ -4,6 +4,12 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { AppLayout } from '@app/AppLayout/AppLayout';
 import { AppRoutes } from '@app/routes';
 import DocumentTitle from 'react-document-title';
+import '@patternfly/patternfly/patternfly.css';
+import '@patternfly/react-styles/css/utilities/Spacing/spacing.css';
+import '@patternfly/react-styles/css/utilities/Sizing/sizing.css';
+import '@patternfly/react-styles/css/utilities/Alignment/alignment.css';
+import '@patternfly/react-styles/css/utilities/Flex/flex.css';
+import '@patternfly/react-styles/css/layouts/Flex/flex.css';
 import '@app/app.css';
 
 const App: React.FunctionComponent = () => {
