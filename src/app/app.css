@@ -3,6 +3,11 @@
 }
 
 /* .app-container {
+html, body, #root {
+  height: 100%;
+}
+
+.app-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,7 +75,7 @@ html, body, #root {
   margin-top: var(--pf-global--gutter--md);
 }
 
-@media (max-width: 75em) { 
+@media (max-width: 75em) {
   .ice-cream-form-after {
     overflow: visible;
   }

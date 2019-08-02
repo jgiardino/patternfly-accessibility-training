@@ -1,12 +1,12 @@
-import React, { Component } from "react";
+import * as React from "react";
 import {
   PageSection,
   PageSectionVariants,
   Text,
   TextContent
 } from '@patternfly/react-core';
- 
-class Home extends Component {
+
+class Home extends React.Component {
   render() {
     return (
       <>
@@ -26,5 +26,5 @@ class Home extends Component {
     );
   }
 }
- 
-export default Home;
+
+export { Home };
