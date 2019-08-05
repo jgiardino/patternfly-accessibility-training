@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
+import { Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { Alert, PageSection } from '@patternfly/react-core';
 import { DynamicImport } from '@app/DynamicImport';
 import { accessibleRouteChangeHandler } from '@app/utils/utils';
@@ -14,15 +14,16 @@ import KeyboardScreenReaderBefore from "../pages/KeyboardScreenReaderBefore";
 import KeyboardScreenReaderAfter from "../pages/KeyboardScreenReaderAfter";
 import ScreenReaderBefore from "../pages/ScreenReaderBefore";
 import ScreenReaderAfter from "../pages/ScreenReaderAfter";
+import { LastLocationProvider, useLastLocation } from 'react-router-last-location';
 
 const getSupportModuleAsync = () => {
   return () => import(/* webpackChunkName: 'support' */ '@app/Support/Support');
 };
 
 const Support = (routeProps: RouteComponentProps) => {
-  let navAction = routeProps.history.action === 'PUSH';
+  const lastNavigation = useLastLocation();
   return (
-    <DynamicImport inAppNavigation={navAction} load={getSupportModuleAsync()}>
+    <DynamicImport focusContentAfterMount={lastNavigation !== null} load={getSupportModuleAsync()}>
       {(Component: any) => {
           let loadedComponent: any;
           if (Component === null) {
@@ -48,11 +49,8 @@ const RouteWithTitleUpdates = ({
   title,
   ...rest
 }) => {
-  let inAppNavigation: boolean;
-
+  const lastNavigation = useLastLocation();
   function routeWithTitle(routeProps: RouteComponentProps) {
-
-    inAppNavigation = routeProps.history.action === 'PUSH';
     return (
       <DocumentTitle title={title}>
         <Component {...routeProps} />
@@ -61,7 +59,7 @@ const RouteWithTitleUpdates = ({
   }
 
   React.useEffect(() => {
-    if (!isAsync && inAppNavigation) {
+    if (!isAsync && lastNavigation !== null) {
       accessibleRouteChangeHandler();
     }
 
@@ -167,18 +165,20 @@ const routes: IAppRoute[] = [
 ];
 
 const AppRoutes = () => (
-  <Switch>
-    {routes.map(({ path, exact, component, title, isAsync }, idx) => (
-      <RouteWithTitleUpdates
-        path={path}
-        exact={exact}
-        component={component}
-        key={idx}
-        title={title}
-        isAsync={isAsync} />
-    ))}
-    <RouteWithTitleUpdates component={NotFound} title={'404 Page Not Found'} />
-  </Switch>
+  <LastLocationProvider>
+    <Switch>
+      {routes.map(({ path, exact, component, title, isAsync }, idx) => (
+        <RouteWithTitleUpdates
+          path={path}
+          exact={exact}
+          component={component}
+          key={idx}
+          title={title}
+          isAsync={isAsync} />
+      ))}
+      <RouteWithTitleUpdates component={NotFound} title={'404 Page Not Found'} />
+    </Switch>
+  </LastLocationProvider>
 );
 
 export { AppRoutes, routes };

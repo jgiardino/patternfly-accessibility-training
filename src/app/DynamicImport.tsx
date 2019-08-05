@@ -4,7 +4,7 @@ import { accessibleRouteChangeHandler } from '@app/utils/utils';
 interface IDynamicImport {
   load: () => Promise<any>;
   children: any;
-  inAppNavigation: boolean;
+  focusContentAfterMount: boolean;
 }
 
 class DynamicImport extends React.Component<IDynamicImport> {
@@ -20,7 +20,7 @@ class DynamicImport extends React.Component<IDynamicImport> {
       }
     })
     .then(() => {
-      if (this.props.inAppNavigation) {
+      if (this.props.focusContentAfterMount) {
         accessibleRouteChangeHandler();
       }
     });
