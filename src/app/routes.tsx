@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { Route, RouteComponentProps, Switch } from 'react-router-dom';
-import { Alert, PageSection } from '@patternfly/react-core';
-import { DynamicImport } from '@app/DynamicImport';
 import { accessibleRouteChangeHandler } from '@app/utils/utils';
 import { NotFound } from '@app/NotFound/NotFound';
 import DocumentTitle from 'react-document-title';
@@ -16,32 +14,6 @@ import ScreenReaderBefore from "../pages/ScreenReaderBefore";
 import ScreenReaderAfter from "../pages/ScreenReaderAfter";
 import { LastLocationProvider, useLastLocation } from 'react-router-last-location';
 let routeFocusTimer: number;
-const getSupportModuleAsync = () => {
-  return () => import(/* webpackChunkName: 'support' */ '@app/Support/Support');
-};
-
-const Support = (routeProps: RouteComponentProps) => {
-  const lastNavigation = useLastLocation();
-  return (
-    <DynamicImport focusContentAfterMount={lastNavigation !== null} load={getSupportModuleAsync()}>
-      {(Component: any) => {
-          let loadedComponent: any;
-          if (Component === null) {
-            loadedComponent = (
-              <PageSection aria-label="Loading Content Container">
-                <div className="pf-l-bullseye">
-                  <Alert title="Loading" className="pf-l-bullseye__item" />
-                </div>
-              </PageSection>
-            );
-          } else {
-            loadedComponent = <Component.Support {...routeProps} />;
-          }
-          return loadedComponent
-      }}
-    </DynamicImport>
-  );
-};
 
 const RouteWithTitleUpdates = ({
   component: Component,
@@ -62,6 +34,10 @@ const RouteWithTitleUpdates = ({
     if (!isAsync && lastNavigation !== null) {
       routeFocusTimer = accessibleRouteChangeHandler();
     }
+
+    return () => {
+      clearTimeout(routeFocusTimer);
+    };
 
   }, []);
 
@@ -88,15 +64,6 @@ const routes: IAppRoute[] = [
     label: 'Home',
     path: '/',
     title: 'Patternfly Accessibility Training'
-  },
-  {
-    component: Support,
-    exact: true,
-    icon: null,
-    isAsync: true,
-    label: 'Support',
-    path: '/support',
-    title: 'Support Page Title'
   },
   {
     component: LowVisionBefore,
