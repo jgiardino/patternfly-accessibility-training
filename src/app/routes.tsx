@@ -15,7 +15,7 @@ import KeyboardScreenReaderAfter from "../pages/KeyboardScreenReaderAfter";
 import ScreenReaderBefore from "../pages/ScreenReaderBefore";
 import ScreenReaderAfter from "../pages/ScreenReaderAfter";
 import { LastLocationProvider, useLastLocation } from 'react-router-last-location';
-
+let routeFocusTimer: number;
 const getSupportModuleAsync = () => {
   return () => import(/* webpackChunkName: 'support' */ '@app/Support/Support');
 };
@@ -60,7 +60,7 @@ const RouteWithTitleUpdates = ({
 
   React.useEffect(() => {
     if (!isAsync && lastNavigation !== null) {
-      accessibleRouteChangeHandler();
+      routeFocusTimer = accessibleRouteChangeHandler();
     }
 
   }, []);
