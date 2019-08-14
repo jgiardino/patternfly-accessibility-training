@@ -30,7 +30,7 @@ class PageLayout extends Component<Props, any> {
             </div>
           </div>
         </PageSection>
-        <PageSection variant={PageSectionVariants.light} isFilled={true} className="pf-u-p-0">
+        <PageSection variant={PageSectionVariants.light} isFilled={true} className="pf-u-p-0 pf-u-h-100">
           <div className="pf-l-grid pf-u-h-100">
             <div className="pf-l-grid__item pf-m-9-col">
               {this.props.children}

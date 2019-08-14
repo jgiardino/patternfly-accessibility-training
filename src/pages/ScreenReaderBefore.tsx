@@ -10,7 +10,7 @@ class ScreenReaderBefore extends Component {
   render() {
     const instructions = <ScreenReaderBeforeSteps />;
     return (
-      <PageLayout title="After example for Keyboard and Screen Reader" instructions={instructions}>
+      <PageLayout before title="Before example for Keyboard and Screen Reader" instructions={instructions}>
         <div className="pf-l-stack main-section pf-u-h-100" >
           <div className="pf-l-stack__item pf-u-p-lg">
             <nav className="pf-c-tabs" id="primary">

@@ -14,7 +14,7 @@ class KeyboardScreenReaderBefore extends Component {
   render() {
     const instructions = <KeyboardScreenReaderBeforeSteps />;
     return (
-      <PageLayout title="After example for Keyboard and Screen Reader" instructions={instructions}>
+      <PageLayout before title="Before example for Keyboard and Screen Reader" instructions={instructions}>
         <div className="main-section pf-u-h-100">
           <div className="pf-l-grid pf-u-m-lg">
           <div className="pf-l-grid__item pf-m-6-col pf-u-mr-lg">
