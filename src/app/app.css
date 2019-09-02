@@ -22,11 +22,6 @@ html, body, #root {
   height: 100%;
 }
 
-/* .page__header {
-  position: sticky;
-  top: 0;
-} */
-
 .pf-c-page__main .pf-c-page__main-section.pf-m-fill {
   min-height: 0;
   flex: 1 1 auto;
@@ -35,6 +30,15 @@ html, body, #root {
 
 .card-how-to, .ice-cream-form, .main-section {
   overflow: auto;
+}
+
+.main-section-no-scroll {
+  overflow: hidden;
+}
+
+.main-section__title {
+  border-bottom: 1px solid var(--pf-global--BorderColor--100);
+  background-color: var(--pf-global--BackgroundColor--300) !important;
 }
 
 .light-gray {

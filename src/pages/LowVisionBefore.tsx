@@ -14,7 +14,6 @@ class LowVisionBefore extends Component {
   const instructions = <LowVisionBeforeSteps />;
     return (
       <PageLayout before title="Before example for Low & No Vision" instructions={instructions}>
-        <div className="pf-l-stack" >
           <div className="pf-l-stack__item pf-u-p-lg">
             <div className="pf-c-alert pf-m-danger pf-m-inline pf-u-mb-lg" aria-label="inline danger alert">
               <h4 className="pf-c-alert__title">
@@ -165,7 +164,6 @@ class LowVisionBefore extends Component {
             <Button variant="primary">Add New Sundae</Button>{` `}
             <Button variant="secondary">Cancel</Button>
           </div>
-        </div>
       </PageLayout>
     );
   }
